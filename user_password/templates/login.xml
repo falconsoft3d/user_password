@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<!--
+    <template id="assets_login" inherit_id="web.assets_frontend">
+		<xpath expr="." position="inside">
+			<link rel="stylesheet" href="/l10n_cl_base_web/static/src/css/login.css"></link>
+		</xpath>
+	</template>
+-->
+
+	<template id="login_inherit" inherit_id="web.login">
+        <xpath expr="//form[@class='oe_login_form']" position="after">
+            <div class="text-center">
+                <br/>
+
+                <div class="alert alert-block">
+                    <t t-foreach="request.env['ir.config_parameter'].search([('key', '=', 'note')])" t-as="note">
+                        <p class="alert alert-info">
+                            <t t-esc="note.value"/>
+                         </p>
+                    </t>
+                </div>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th class="text-center">Usuario</th>
+                        <th class="text-center">Contraseña</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="request.env['user.password'].search([])" t-as="user">
+                            <tr><td><t t-esc="user.name"/></td><td><t t-esc="user.mypass"/></td></tr>
+                        </t>
+                    </tbody>
+                </table>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>
